@@ -1,0 +1,915 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>加密货币工具导航站 - Crypto Tools Hub</title>
+    <meta name="description" content="精选加密货币常用工具导航，包含交易所、钱包、数据分析、DeFi等实用工具">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-color: #2563eb;
+            --secondary-color: #1e40af;
+            --bg-color: #f8fafc;
+            --card-bg: #ffffff;
+            --text-primary: #1e293b;
+            --text-secondary: #64748b;
+            --border-color: #e2e8f0;
+            --hover-color: #eff6ff;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Helvetica Neue', Arial, sans-serif;
+            background: var(--bg-color);
+            color: var(--text-primary);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            color: white;
+            padding: 40px 20px;
+            text-align: center;
+            margin-bottom: 40px;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+
+        header p {
+            font-size: 1.1rem;
+            opacity: 0.95;
+        }
+
+        .search-box {
+            max-width: 600px;
+            margin: 30px auto 0;
+            position: relative;
+        }
+
+        .search-box input {
+            width: 100%;
+            padding: 15px 20px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+        }
+
+        .category {
+            margin-bottom: 50px;
+        }
+
+        .category-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 3px solid var(--primary-color);
+        }
+
+        .category-icon {
+            font-size: 2rem;
+            margin-right: 15px;
+        }
+
+        .category-title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+
+        .tools-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        .tool-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 20px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .tool-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            border-color: var(--primary-color);
+        }
+
+        .tool-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 12px;
+        }
+
+        .tool-logo {
+            width: 40px;
+            height: 40px;
+            margin-right: 12px;
+            border-radius: 8px;
+            background: var(--hover-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+        }
+
+        .tool-name {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .tool-description {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            margin-bottom: 15px;
+            line-height: 1.5;
+        }
+
+        .tool-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .tag {
+            background: var(--hover-color);
+            color: var(--primary-color);
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+
+        .tool-link {
+            text-decoration: none;
+            color: inherit;
+            display: block;
+        }
+
+        footer {
+            text-align: center;
+            padding: 40px 20px;
+            color: var(--text-secondary);
+            border-top: 1px solid var(--border-color);
+            margin-top: 60px;
+        }
+
+        .update-info {
+            background: #fef3c7;
+            border-left: 4px solid #f59e0b;
+            padding: 15px 20px;
+            margin-bottom: 30px;
+            border-radius: 8px;
+        }
+
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 2rem;
+            }
+
+            .tools-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .category-title {
+                font-size: 1.5rem;
+            }
+        }
+
+        .external-link::after {
+            content: " ↗";
+            font-size: 0.85em;
+            opacity: 0.6;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🚀 加密货币工具导航站</h1>
+            <p>精选实用加密货币工具，助力您的数字资产之旅</p>
+            <div class="search-box">
+                <input type="text" id="searchInput" placeholder="搜索工具名称或描述...">
+            </div>
+        </header>
+
+        <div class="update-info">
+            <strong>💡 提示：</strong> 本导航站持续更新中，如需添加工具或有任何建议，欢迎反馈。最后更新：2024年12月
+        </div>
+
+        <!-- 交易所 -->
+        <section class="category">
+            <div class="category-header">
+                <span class="category-icon">💱</span>
+                <h2 class="category-title">加密货币交易所</h2>
+            </div>
+            <div class="tools-grid">
+                <a href="https://www.binance.com" target="_blank" class="tool-link">
+                    <div class="tool-card">
+                        <div class="tool-header">
+                            <div class="tool-logo">🔶</div>
+                            <div class="tool-name">Binance (币安)</div>
+                        </div>
+                        <div class="tool-description">全球交易量最大的加密货币交易所，支持现货、合约、杠杆等多种交易方式</div>
+                        <div class="tool-tags">
+                            <span class="tag">现货</span>
+                            <span class="tag">合约</span>
+                            <span class="tag">理财</span>
+                        </div>
+                    </div>
+                </a>
+
+                <a href="https://www.okx.com" target="_blank" class="tool-link">
+                    <div class="tool-card">
+                        <div class="tool-header">
+                            <div class="tool-logo">⚪</div>
+                            <div class="tool-name">OKX (欧易)</div>
+                        </div>
+                        <div class="tool-description">综合性数字资产交易平台，提供Web3钱包和DeFi服务</div>
+                        <div class="tool-tags">
+                            <span class="tag">现货</span>
+                            <span class="tag">合约</span>
+                            <span class="tag">Web3</span>
+                        </div>
+                    </div>
+                </a>
+
+                <a href="https://www.coinbase.com" target="_blank" class="tool-link">
+                    <div class="tool-card">
+                        <div class="tool-header">
+                            <div class="tool-logo">🔵</div>
+                            <div class="tool-name">Coinbase</div>
+                        </div>
+                        <div class="tool-description">美国合规交易所，适合新手，界面友好</div>
+                        <div class="tool-tags">
+                            <span class="tag">合规</span>
+                            <span class="tag">新手友好</span>
+                        </div>
+                    </div>
+                </a>
+
+                <a href="https://www.bybit.com" target="_blank" class="tool-link">
+                    <div class="tool-card">
+                        <div class="tool-header">
+                            <div class="tool-logo">🟡</div>
+                            <div class="tool-name">Bybit</div>
+                        </div>
+                        <div class="tool-description">专注衍生品交易，合约交易体验优秀</div>
+                        <div class="tool-tags">
+                            <span class="tag">合约</span>
+                            <span class="tag">衍生品</span>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </section>
+
+        <!-- 数据分析 -->
+        <section class="category">
+            <div class="category-header">
+                <span class="category-icon">📊</span>
+                <h2 class="category-title">数据分析工具</h2>
+            </div>
+            <div class="tools-grid">
+                <a href="https://www.coingecko.com" target="_blank" class="tool-link">
+                    <div class="tool-card">
+                        <div class="tool-header">
+                            <div class="tool-logo">🦎</div>
+                            <div class="tool-name">CoinGecko</div>
+                        </div>
+                        <div class="tool-description">全面的加密货币市场数据平台，提供价格、市值、交易量等信息</div>
+                        <div class="tool-tags">
+                            <span class="tag">行情数据</span>
+                            <span class="tag">免费</span>
+                        </div>
+                    </div>
+                </a>
+
+                <a href="https://coinmarketcap.com" target="_blank" class="tool-link">
+                    <div class="tool-card">
+                        <div class="tool-header">
+                            <div class="tool-logo">💎</div>
+                            <div class="tool-name">CoinMarketCap</div>
+                        </div>
+                        <div class="tool-description">老牌加密货币行情网站，数据全面可靠</div>
+                        <div class="tool-tags">
+                            <span class="tag">行情</span>
+                            <span class="tag">排名</span>
+                        </div>
+                    </div>
+                </a>
+
+                <a href="https://www.tradingview.com" target="_blank" class="tool-link">
+                    <div class="tool-card">
+                        <div class="tool-header">
+                            <div class="tool-logo">📈</div>
+                            <div class="tool-name">TradingView</div>
+                        </div>
+                        <div class="tool-description">专业的图表分析工具，支持多种技术指标和策略回测</div>
+                        <div class="tool-tags">
+                            <span class="tag">图表</span>
+                            <span class="tag">技术分析</span>
+                        </div>
+                    </div>
+                </a>
+
+                <a href="https://glassnode.com" target="_blank" class="tool-link">
+                    <div class="tool-card">
+                        <div class="tool-header">
+                            <div class="tool-logo">🔍</div>
+                            <div class="tool-name">Glassnode</div>
+                        </div>
+                        <div class="tool-description">链上数据分析平台，提供专业的区块链指标</div>
+                        <div class="tool-tags">
+                            <span class="tag">链上数据</span>
+                            <span class="tag">专业</span>
+                        </div>
+                    </div>
+                </a>
+
+                <a href="https://www.coinglass.com" target="_blank" class="tool-link">
+                    <div class="tool-card">
+                        <div class="tool-header">
+                            <div class="tool-logo">📉</div>
+                            <div class="tool-name">Coinglass</div>
+                        </div>
+                        <div class="tool-description">合约数据分析，爆仓数据、资金费率、持仓量等</div>
+                        <div class="tool-tags">
+                            <span class="tag">合约数据</span>
+                            <span class="tag">爆仓</span>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </section>
+
+        <!-- 钱包 -->
+        <section class="category">
+            <div class="category-header">
+                <span class="category-icon">👛</span>
+                <h2 class="category-title">数字钱包</h2>
+            </div>
+            <div class="tools-grid">
+                <a href="https://metamask.io" target="_blank" class="tool-link">
+                    <div class="tool-card">
+                        <div class="tool-header">
+                            <div class="tool-logo">🦊</div>
+                            <div class="tool-name">MetaMask</div>
+                        </div>
+                        <div class="tool-description">最流行的以太坊浏览器钱包，支持EVM链</div>
+                        <div class="tool-tags">
+                            <span class="tag">浏览器</span>
+                            <span class="tag">EVM</span>
+                        </div>
+                    </div>
+                </a>
+
+                <a href="https://trustwallet.com" target="_blank" class="tool-link">
+                    <div class="tool-card">
+                        <div class="tool-header">
+                            <div class="tool-logo">🔷</div>
+                            <div class="tool-name">Trust Wallet</div>
+                        </div>
+                        <div class="tool-description">币安官方移动钱包，支持多链和DApp浏览器</div>
+                        <div class="tool-tags">
+                            <span class="tag">移动端</span>
+                            <span class="tag">多链</span>
+                        </div>
+                    </div>
+                </a>
+
+                <a href="https://phantom.app" target="_blank" class="tool-link">
+                    <div class="tool-card">
+                        <div class="tool-header">
+                            <div class="tool-logo">👻</div>
+                            <div class="tool-name">Phantom</div>
+                        </div>
+                        <div class="tool-description">Solana生态最受欢迎的钱包</div>
+                        <div class="tool-tags">
+                            <span class="tag">Solana</span>
+                            <span class="tag">友好</span>
+                        </div>
+                    </div>
+                </a>
+
+                <a href="https://www.ledger.com" target="_blank" class="tool-link">
+                    <div class="tool-card">
+                        <div class="tool-header">
+                            <div class="tool-logo">🔐</div>
+                            <div class="tool-name">Ledger</div>
+                        </div>
+                        <div class="tool-description">硬件冷钱包，安全性最高</div>
+                        <div class="tool-tags">
+                            <span class="tag">硬件钱包</span>
+                            <span class="tag">安全</span>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </section>
+
+        <!-- DeFi平台 -->
+        <section class="category">
+            <div class="category-header">
+                <span class="category-icon">🏦</span>
+                <h2 class="category-title">DeFi 去中心化金融</h2>
+            </div>
+            <div class="tools-grid">
+                <a href="https://uniswap.org" target="_blank" class="tool-link">
+                    <div class="tool-card">
+                        <div class="tool-header">
+                            <div class="tool-logo">🦄</div>
+                            <div class="tool-name">Uniswap</div>
+                        </div>
+                        <div class="tool-description">以太坊上最大的去中心化交易所</div>
+                        <div class="tool-tags">
+                            <span class="tag">DEX</span>
+                            <span class="tag">Ethereum</span>
+                        </div>
+                    </div>
+                </a>
+
+                <a href="https://aave.com" target="_blank" class="tool-link">
+                    <div class="tool-card">
+                        <div class="tool-header">
+                            <div class="tool-logo">👁️</div>
+                            <div class="tool-name">Aave</div>
+                        </div>
+                        <div class="tool-description">去中心化借贷协议，支持多种资产</div>
+                        <div class="tool-tags">
+                            <span class="tag">借贷</span>
+                            <span class="tag">多链</span>
+                        </div>
+                    </div>
+                </a>
+
+                <a href="https://curve.fi" target="_blank" class="tool-link">
+                    <div class="tool-card">
+                        <div class="tool-header">
+                            <div class="tool-logo">🌊</div>
+                            <div class="tool-name">Curve Finance</div>
+                        </div>
+                        <div class="tool-description">稳定币交易的DEX，低滑点</div>
+                        <div class="tool-tags">
+                            <span class="tag">稳定币</span>
+                            <span class="tag">流动性</span>
+                        </div>
+                    </div>
+                </a>
+
+                <a href="https://pancakeswap.finance" target="_blank" class="tool-link">
+                    <div class="tool-card">
+                        <div class="tool-header">
+                            <div class="tool-logo">🥞</div>
+                            <div class="tool-name">PancakeSwap</div>
+                        </div>
+                        <div class="tool-description">BSC链上最大的DEX</div>
+                        <div class="tool-tags">
+                            <span class="tag">BSC</span>
+                            <span class="tag">DEX</span>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </section>
+
+        <!-- 区块链浏览器 -->
+        <section class="category">
+            <div class="category-header">
+                <span class="category-icon">🔎</span>
+                <h2 class="category-title">区块链浏览器</h2>
+            </div>
+            <div class="tools-grid">
+                <a href="https://etherscan.io" target="_blank" class="tool-link">
+                    <div class="tool-card">
+                        <div class="tool-header">
+                            <div class="tool-logo">⟠</div>
+                            <div class="tool-name">Etherscan</div>
+                        </div>
+                        <div class="tool-description">以太坊区块链浏览器，查询交易和智能合约</div>
+                        <div class="tool-tags">
+                            <span class="tag">Ethereum</span>
+                            <span class="tag">浏览器</span>
+                        </div>
+                    </div>
+                </a>
+
+                <a href="https://bscscan.com" target="_blank" class="tool-link">
+                    <div class="tool-card">
+                        <div class="tool-header">
+                            <div class="tool-logo">🔶</div>
+                            <div class="tool-name">BscScan</div>
+                        </div>
+                        <div class="tool-description">BSC链浏览器</div>
+                        <div class="tool-tags">
+                            <span class="tag">BSC</span>
+                        </div>
+                    </div>
+                </a>
+
+                <a href="https://solscan.io" target="_blank" class="tool-link">
+                    <div class="tool-card">
+                        <div class="tool-header">
+                            <div class="tool-logo">◎</div>
+                            <div class="tool-name">Solscan</div>
+                        </div>
+                        <div class="tool-description">Solana链浏览器</div>
+                        <div class="tool-tags">
+                            <span class="tag">Solana</span>
+                        </div>
+                    </div>
+                </a>
+
+                <a href="https://blockchain.com/explorer" target="_blank" class="tool-link">
+                    <div class="tool-card">
+                        <div class="tool-header">
+                            <div class="tool-logo">₿</div>
+                            <div class="tool-name">Blockchain.com</div>
+                        </div>
+                        <div class="tool-description">比特币区块链浏览器</div>
+                        <div class="tool-tags">
+                            <span class="tag">Bitcoin</span>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </section>
+
+        <!-- 挖矿工具 -->
+        <section class="category">
+            <div class="category-header">
+                <span class="category-icon">⛏️</span>
+                <h2 class="category-title">挖矿工具</h2>
+            </div>
+            <div class="tools-grid">
+                <a href="https://www.nicehash.com" target="_blank" class="tool-link">
+                    <div class="tool-card">
+                        <div class="tool-header">
+                            <div class="tool-logo">⚡</div>
+                            <div class="tool-name">NiceHash</div>
+                        </div>
+                        <div class="tool-description">算力市场平台，简化挖矿流程</div>
+                        <div class="tool-tags">
+                            <span class="tag">挖矿</span>
+                            <span class="tag">新手友好</span>
+                        </div>
+                    </div>
+                </a>
+
+                <a href="https://whattomine.com" target="_blank" class="tool-link">
+                    <div class="tool-card">
+                        <div class="tool-header">
+                            <div class="tool-logo">💰</div>
+                            <div class="tool-name">WhatToMine</div>
+                        </div>
+                        <div class="tool-description">挖矿收益计算器，支持多种币种和硬件</div>
+                        <div class="tool-tags">
+                            <span class="tag">收益计算</span>
+                            <span class="tag">对比</span>
+                        </div>
+                    </div>
+                </a>
+
+                <a href="https://minerstat.com" target="_blank" class="tool-link">
+                    <div class="tool-card">
+                        <div class="tool-header">
+                            <div class="tool-logo">📊</div>
+                            <div class="tool-name">Minerstat</div>
+                        </div>
+                        <div class="tool-description">挖矿监控和管理平台</div>
+                        <div class="tool-tags">
+                            <span class="tag">监控</span>
+                            <span class="tag">管理</span>
+                        </div>
+                    </div>
+                </a>
+
+                <a href="https://supminer.net" target="_blank" class="tool-link">
+                    <div class="tool-card">
+                        <div class="tool-header">
+                            <div class="tool-logo">🏠</div>
+                            <div class="tool-name">SupMiner</div>
+                        </div>
+                        <div class="tool-description">家庭挖矿咨询与技术服务</div>
+                        <div class="tool-tags">
+                            <span class="tag">咨询</span>
+                            <span class="tag">服务</span>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </section>
+
+        <!-- 新闻资讯 -->
+        <section class="category">
+            <div class="category-header">
+                <span class="category-icon">📰</span>
+                <h2 class="category-title">新闻与资讯</h2>
+            </div>
+            <div class="tools-grid">
+                <a href="https://cointelegraph.com" target="_blank" class="tool-link">
+                    <div class="tool-card">
+                        <div class="tool-header">
+                            <div class="tool-logo">📱</div>
+                            <div class="tool-name">Cointelegraph</div>
+                        </div>
+                        <div class="tool-description">加密货币新闻和分析媒体</div>
+                        <div class="tool-tags">
+                            <span class="tag">新闻</span>
+                            <span class="tag">英文</span>
+                        </div>
+                    </div>
+                </a>
+
+                <a href="https://www.theblock.co" target="_blank" class="tool-link">
+                    <div class="tool-card">
+                        <div class="tool-header">
+                            <div class="tool-logo">🔲</div>
+                            <div class="tool-name">The Block</div>
+                        </div>
+                        <div class="tool-description">专业的区块链研究和新闻</div>
+                        <div class="tool-tags">
+                            <span class="tag">研究</span>
+                            <span class="tag">数据</span>
+                        </div>
+                    </div>
+                </a>
+
+                <a href="https://decrypt.co" target="_blank" class="tool-link">
+                    <div class="tool-card">
+                        <div class="tool-header">
+                            <div class="tool-logo">🔓</div>
+                            <div class="tool-name">Decrypt</div>
+                        </div>
+                        <div class="tool-description">加密货币新闻和教育内容</div>
+                        <div class="tool-tags">
+                            <span class="tag">新闻</span>
+                            <span class="tag">教育</span>
+                        </div>
+                    </div>
+                </a>
+
+                <a href="https://www.8btc.com" target="_blank" class="tool-link">
+                    <div class="tool-card">
+                        <div class="tool-header">
+                            <div class="tool-logo">⑧</div>
+                            <div class="tool-name">8BTC (巴比特)</div>
+                        </div>
+                        <div class="tool-description">中文区块链资讯门户</div>
+                        <div class="tool-tags">
+                            <span class="tag">中文</span>
+                            <span class="tag">社区</span>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </section>
+
+        <!-- 学习资源 -->
+        <section class="category">
+            <div class="category-header">
+                <span class="category-icon">📚</span>
+                <h2 class="category-title">学习资源</h2>
+            </div>
+            <div class="tools-grid">
+                <a href="https://academy.binance.com" target="_blank" class="tool-link">
+                    <div class="tool-card">
+                        <div class="tool-header">
+                            <div class="tool-logo">🎓</div>
+                            <div class="tool-name">Binance Academy</div>
+                        </div>
+                        <div class="tool-description">币安学院，免费的加密货币教育资源</div>
+                        <div class="tool-tags">
+                            <span class="tag">教程</span>
+                            <span class="tag">免费</span>
+                        </div>
+                    </div>
+                </a>
+
+                <a href="https://www.cryptotutorialshub.com" target="_blank" class="tool-link">
+                    <div class="tool-card">
+                        <div class="tool-header">
+                            <div class="tool-logo">🌟</div>
+                            <div class="tool-name">CryptoTutorialsHub</div>
+                        </div>
+                        <div class="tool-description">加密货币教程和防骗指南</div>
+                        <div class="tool-tags">
+                            <span class="tag">中文</span>
+                            <span class="tag">防骗</span>
+                        </div>
+                    </div>
+                </a>
+
+                <a href="https://ethereum.org" target="_blank" class="tool-link">
+                    <div class="tool-card">
+                        <div class="tool-header">
+                            <div class="tool-logo">⟠</div>
+                            <div class="tool-name">Ethereum.org</div>
+                        </div>
+                        <div class="tool-description">以太坊官方文档和学习资源</div>
+                        <div class="tool-tags">
+                            <span class="tag">官方</span>
+                            <span class="tag">开发</span>
+                        </div>
+                    </div>
+                </a>
+
+                <a href="https://www.youtube.com/@CoinBureau" target="_blank" class="tool-link">
+                    <div class="tool-card">
+                        <div class="tool-header">
+                            <div class="tool-logo">📺</div>
+                            <div class="tool-name">Coin Bureau</div>
+                        </div>
+                        <div class="tool-description">高质量的加密货币视频教程</div>
+                        <div class="tool-tags">
+                            <span class="tag">视频</span>
+                            <span class="tag">英文</span>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </section>
+
+        <!-- 开发工具 -->
+        <section class="category">
+            <div class="category-header">
+                <span class="category-icon">🛠️</span>
+                <h2 class="category-title">开发者工具</h2>
+            </div>
+            <div class="tools-grid">
+                <a href="https://remix.ethereum.org" target="_blank" class="tool-link">
+                    <div class="tool-card">
+                        <div class="tool-header">
+                            <div class="tool-logo">🔧</div>
+                            <div class="tool-name">Remix IDE</div>
+                        </div>
+                        <div class="tool-description">在线智能合约开发和测试环境</div>
+                        <div class="tool-tags">
+                            <span class="tag">Solidity</span>
+                            <span class="tag">IDE</span>
+                        </div>
+                    </div>
+                </a>
+
+                <a href="https://hardhat.org" target="_blank" class="tool-link">
+                    <div class="tool-card">
+                        <div class="tool-header">
+                            <div class="tool-logo">⚒️</div>
+                            <div class="tool-name">Hardhat</div>
+                        </div>
+                        <div class="tool-description">专业的以太坊开发环境</div>
+                        <div class="tool-tags">
+                            <span class="tag">开发</span>
+                            <span class="tag">测试</span>
+                        </div>
+                    </div>
+                </a>
+
+                <a href="https://www.alchemy.com" target="_blank" class="tool-link">
+                    <div class="tool-card">
+                        <div class="tool-header">
+                            <div class="tool-logo">⚗️</div>
+                            <div class="tool-name">Alchemy</div>
+                        </div>
+                        <div class="tool-description">区块链API和基础设施服务</div>
+                        <div class="tool-tags">
+                            <span class="tag">API</span>
+                            <span class="tag">节点</span>
+                        </div>
+                    </div>
+                </a>
+
+                <a href="https://thegraph.com" target="_blank" class="tool-link">
+                    <div class="tool-card">
+                        <div class="tool-header">
+                            <div class="tool-logo">📡</div>
+                            <div class="tool-name">The Graph</div>
+                        </div>
+                        <div class="tool-description">去中心化的区块链数据索引协议</div>
+                        <div class="tool-tags">
+                            <span class="tag">索引</span>
+                            <span class="tag">查询</span>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </section>
+
+        <!-- 安全工具 -->
+        <section class="category">
+            <div class="category-header">
+                <span class="category-icon">🔒</span>
+                <h2 class="category-title">安全工具</h2>
+            </div>
+            <div class="tools-grid">
+                <a href="https://gopluslabs.io" target="_blank" class="tool-link">
+                    <div class="tool-card">
+                        <div class="tool-header">
+                            <div class="tool-logo">🛡️</div>
+                            <div class="tool-name">GoPlus Security</div>
+                        </div>
+                        <div class="tool-description">代币安全检测工具，识别风险代币</div>
+                        <div class="tool-tags">
+                            <span class="tag">安全检测</span>
+                            <span class="tag">防骗</span>
+                        </div>
+                    </div>
+                </a>
+
+                <a href="https://honeypot.is" target="_blank" class="tool-link">
+                    <div class="tool-card">
+                        <div class="tool-header">
+                            <div class="tool-logo">🍯</div>
+                            <div class="tool-name">Honeypot Detector</div>
+                        </div>
+                        <div class="tool-description">检测代币是否为蜜罐骗局</div>
+                        <div class="tool-tags">
+                            <span class="tag">蜜罐检测</span>
+                        </div>
+                    </div>
+                </a>
+
+                <a href="https://tokensniffer.com" target="_blank" class="tool-link">
+                    <div class="tool-card">
+                        <div class="tool-header">
+                            <div class="tool-logo">🔍</div>
+                            <div class="tool-name">Token Sniffer</div>
+                        </div>
+                        <div class="tool-description">智能合约安全扫描工具</div>
+                        <div class="tool-tags">
+                            <span class="tag">合约审计</span>
+                            <span class="tag">风险评估</span>
+                        </div>
+                    </div>
+                </a>
+
+                <a href="https://www.certik.com" target="_blank" class="tool-link">
+                    <div class="tool-card">
+                        <div class="tool-header">
+                            <div class="tool-logo">✓</div>
+                            <div class="tool-name">CertiK</div>
+                        </div>
+                        <div class="tool-description">专业的区块链安全审计公司</div>
+                        <div class="tool-tags">
+                            <span class="tag">审计</span>
+                            <span class="tag">专业</span>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </section>
+
+        <footer>
+            <p><strong>免责声明：</strong> 本导航站仅提供工具链接整理，不构成任何投资建议。请自行判断风险，谨慎投资。</p>
+            <p style="margin-top: 10px;">© 2024 Crypto Tools Hub | 持续更新中</p>
+        </footer>
+    </div>
+
+    <script>
+        // 搜索功能
+        const searchInput = document.getElementById('searchInput');
+        const toolCards = document.querySelectorAll('.tool-card');
+
+        searchInput.addEventListener('input', function(e) {
+            const searchTerm = e.target.value.toLowerCase();
+            
+            toolCards.forEach(card => {
+                const toolName = card.querySelector('.tool-name').textContent.toLowerCase();
+                const toolDesc = card.querySelector('.tool-description').textContent.toLowerCase();
+                
+                if (toolName.includes(searchTerm) || toolDesc.includes(searchTerm)) {
+                    card.parentElement.style.display = 'block';
+                } else {
+                    card.parentElement.style.display = 'none';
+                }
+            });
+        });
+
+        // 统计显示
+        const totalTools = toolCards.length;
+        console.log(`已收录 ${totalTools} 个工具`);
+    </script>
+</body>
+</html>
